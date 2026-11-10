@@ -25,6 +25,15 @@ export interface Service {
   messageLabel: string;
 }
 
+export type NavIconName = "services" | "why" | "steps" | "faq" | "contact";
+
+export interface NavItem {
+  href: string;
+  label: string;
+  short: string;
+  icon: NavIconName;
+}
+
 export interface Faq {
   question: string;
   answer: string;
@@ -62,13 +71,14 @@ export const site = {
     service: (label: string) => `السلام عليكم، أرغب بالاستفسار عن خدمة ${label} لدى مدارات السداد.`,
   },
 
+  /** short: اسم مختصر لشريط التنقل في الجوال */
   nav: [
-    { href: "#services", label: "الخدمات" },
-    { href: "#why", label: "لماذا مدارات السداد" },
-    { href: "#steps", label: "خطوات التواصل" },
-    { href: "#faq", label: "الأسئلة الشائعة" },
-    { href: "#contact", label: "تواصل معنا" },
-  ],
+    { href: "#services", label: "الخدمات", short: "الخدمات", icon: "services" },
+    { href: "#why", label: "لماذا مدارات السداد", short: "لماذا نحن", icon: "why" },
+    { href: "#steps", label: "خطوات التواصل", short: "الخطوات", icon: "steps" },
+    { href: "#faq", label: "الأسئلة الشائعة", short: "الأسئلة", icon: "faq" },
+    { href: "#contact", label: "تواصل معنا", short: "تواصل", icon: "contact" },
+  ] satisfies NavItem[],
 
   services: [
     {

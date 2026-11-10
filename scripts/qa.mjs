@@ -51,8 +51,9 @@ const b = await chromium.launch();
   ok("No other (placeholder/fake) links", other.length === 0, other.join(","));
 
   const text = await p.evaluate(() => document.body.innerText);
-  const brandCount = (text.match(/مدارات السداد/g) || []).length;
-  ok("Brand name «مدارات السداد» used", brandCount > 5, `${brandCount}×`);
+  const alts = await p.$$eval("img[alt]", (is) => is.map((i) => i.alt).join(" "));
+  const brandCount = ((text + " " + alts).match(/مدارات السداد/g) || []).length;
+  ok("Brand name «مدارات السداد» used (text + logo alt)", brandCount > 5, `${brandCount}×`);
   ok("No wrong names «مدار السداد» / «مدار سما»", !/(^|[^؀-ۿ])مدار (السداد|سما)/.test(text));
   ok("Both numbers visible on page", text.includes("0562054342") && text.includes("0503705362"));
 

@@ -3,6 +3,7 @@ import { serviceWhatsappLink, site, telLink, type Service } from "@/config/site"
 import { ServiceIcon } from "../icons/ServiceIcon";
 import { WhatsAppIcon } from "../icons/WhatsAppIcon";
 import { SectionHeading } from "../ui/SectionHeading";
+import { SectionMarker } from "../ui/SectionMarker";
 
 /** توزيع الشبكة: بطاقتان عريضتان ثم ثلاث */
 const spans = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2"];
@@ -14,8 +15,8 @@ function ServiceCard({ service, index, featured }: { service: Service; index: nu
       id={service.id}
       aria-labelledby={`${service.id}-title`}
       data-reveal
-      style={{ "--i": index % 3 } as React.CSSProperties}
-      className={`group relative isolate flex scroll-mt-28 flex-col overflow-hidden rounded-[28px] border p-6 transition-[transform,box-shadow,border-color] duration-500 ease-out-expo hover:-translate-y-1 sm:p-8 ${spans[index]} ${
+      style={{ "--i": index % 3, "--stack": index } as React.CSSProperties}
+      className={`group relative isolate flex scroll-mt-36 flex-col max-md:sticky max-md:top-[calc(8.5rem+var(--stack)*14px)] max-md:shadow-[0_-18px_40px_-24px_rgb(2_31_36/0.45)] overflow-hidden rounded-[28px] border p-6 transition-[transform,box-shadow,border-color] duration-500 ease-out-expo hover:-translate-y-1 sm:p-8 ${spans[index]} ${
         dark
           ? "border-white/5 bg-deep text-white shadow-[0_30px_70px_-35px_rgb(2_31_36/0.9)]"
           : "border-teal/10 bg-white text-ink hover:border-teal/25 hover:shadow-[0_30px_70px_-40px_rgb(2_52_59/0.5)]"
@@ -89,8 +90,10 @@ function ServiceCard({ service, index, featured }: { service: Service; index: nu
 
 export function Services() {
   return (
-    <section id="services" aria-labelledby="services-title" className="relative px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+    <section id="services" aria-labelledby="services-title" className="relative px-4 pt-8 pb-24 sm:px-6 sm:pt-12 sm:pb-32 lg:px-8">
       <div className="mx-auto max-w-7xl">
+        <SectionMarker icon="services" />
+        <div className="mt-8" />
         <SectionHeading
             id="services-title"
             eyebrow="خدماتنا"

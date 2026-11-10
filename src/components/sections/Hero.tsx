@@ -50,7 +50,7 @@ export function Hero() {
             style={{ "--i": 3 } as React.CSSProperties}
             className="hero-in mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
-            <CtaLink href={whatsappLink()} size="lg" track="hero-whatsapp" icon={<WhatsAppIcon className="size-5" />}>
+            <CtaLink href={whatsappLink()} size="lg" track="hero-whatsapp" arrow icon={<WhatsAppIcon className="size-5" />}>
               ابدأ المحادثة عبر واتساب
             </CtaLink>
             <CtaLink href={telLink()} size="lg" variant="outline-light" track="hero-call" icon={<Phone className="size-5" aria-hidden="true" />}>

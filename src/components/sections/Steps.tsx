@@ -2,6 +2,7 @@ import { whatsappLink, site } from "@/config/site";
 import { WhatsAppIcon } from "../icons/WhatsAppIcon";
 import { CtaLink } from "../ui/CtaLink";
 import { SectionHeading } from "../ui/SectionHeading";
+import { SectionMarker } from "../ui/SectionMarker";
 
 export function Steps() {
   return (
@@ -9,6 +10,9 @@ export function Steps() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(46rem_30rem_at_50%_-5%,rgb(10_107_119/0.45),transparent_70%)]" />
 
       <div className="mx-auto max-w-7xl">
+        <div className="-mt-24 mb-10 sm:-mt-32 sm:mb-14">
+          <SectionMarker icon="steps" tone="light" />
+        </div>
         <SectionHeading
           id="steps-title"
           tone="light"
@@ -45,7 +49,7 @@ export function Steps() {
         </div>
 
         <div data-reveal className="mt-14 flex flex-col items-center gap-4 text-center">
-          <CtaLink href={whatsappLink()} size="lg" track="steps-whatsapp" icon={<WhatsAppIcon className="size-5" />}>
+          <CtaLink href={whatsappLink()} size="lg" track="steps-whatsapp" arrow icon={<WhatsAppIcon className="size-5" />}>
             ابدأ الخطوة الأولى الآن
           </CtaLink>
           <p className="max-w-md text-sm leading-7 text-white/60">

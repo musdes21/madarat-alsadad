@@ -9,11 +9,7 @@ export function Footer() {
         <div className="grid gap-12 border-b border-teal/10 pb-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <a href="#top" className="inline-flex items-center gap-3" aria-label={`${site.name} — العودة للأعلى`}>
-              <Image src="/brand/mark.webp" alt="" width={56} height={46} className="h-11 w-auto" />
-              <span className="leading-tight">
-                <span className="block font-display text-xl font-bold text-teal">{site.name}</span>
-                <span className="block text-sm text-ink/65">{site.tagline}</span>
-              </span>
+              <Image src="/brand/logo.webp" alt={site.legalName} width={420} height={318} className="h-auto w-40" />
             </a>
             <p className="mt-5 max-w-sm text-[0.95rem] leading-7 text-ink/60">
               نستقبل استفساراتك حول القروض البنكية والتعثرات والبطاقات الائتمانية والمخالفات والتمويل، ونوضّح لك الخيارات المتاحة لحالتك.
