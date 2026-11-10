@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   applicationName: site.name,
   keywords: [
     "مدارات السداد",
-    "تخليص الديون",
+    "تحصيل الديون",
     "تسديد القروض البنكية",
     "سداد المتعثرات",
     "سداد تعثرات سمة",
