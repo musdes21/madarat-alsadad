@@ -49,7 +49,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-3 pt-8 text-sm text-ink/65 md:flex-row md:items-center md:justify-between">
           <p>
-            © <span className="num">{year}</span> {site.legalName}. جميع الحقوق محفوظة.
+            © <span className="num">{year}</span> جميع الحقوق محفوظة لدى {site.copyrightHolder}.
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <p>لا تطلب هذه الصفحة أي بيانات بنكية سرية.</p>

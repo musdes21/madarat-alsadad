@@ -51,6 +51,9 @@ export const site = {
     { display: "0503705362", international: "966503705362", whatsapp: true },
   ] satisfies Phone[],
 
+  /** الجهة المالكة لحقوق الصفحة (تظهر في التذييل) */
+  copyrightHolder: "مؤسسة أسبار التصميم للدعاية والإعلان",
+
   /** رابط سياسة الخصوصية — اتركه null حتى تتوفر صفحة معتمدة */
   privacyPolicyUrl: null as string | null,
 
