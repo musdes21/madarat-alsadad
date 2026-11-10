@@ -1,26 +1,327 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ================================================================
+   مدارات السداد — Design tokens
+   الهوية: تيل عميق من الشعار + رمادي مريمي + لمسة نحاسية هادئة
+   ================================================================ */
+@theme {
+  --color-ink: #021f24;
+  --color-deep: #03343b;
+  --color-teal: #025661; /* لون الشعار الأساسي */
+  --color-teal-600: #0a6b77;
+  --color-teal-400: #3f939c;
+  --color-sage: #b6c1c4; /* لون مدار الشعار */
+  --color-sage-300: #d3dadb;
+  --color-mist: #e9eeee;
+  --color-paper: #f6f7f4;
+  --color-brass: #b8955a;
+  --color-brass-300: #dcc7a0;
+  --color-wa: #25d366;
+  --color-wa-ink: #05341f;
+
+  --font-display: var(--font-readex), var(--font-plex), system-ui, sans-serif;
+  --font-sans: var(--font-plex), system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-orbit: cubic-bezier(0.45, 0, 0.2, 1);
+
+  --animate-orbit-slow: spin 60s linear infinite;
+  --animate-orbit-rev: spin-rev 80s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes spin-rev {
+  to {
+    transform: rotate(-360deg);
   }
 }
 
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@keyframes shine {
+  from {
+    transform: translateX(120%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(-220%) skewX(-18deg);
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ================================================================
+   Base
+   ================================================================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-teal);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* أرقام الهواتف تظهر دائمًا من اليسار لليمين دون انعكاس */
+.num {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* ================================================================
+   Reveal on scroll (يعمل فقط عند توفر JavaScript)
+   ================================================================ */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ================================================================
+   Grain + subtle textures
+   ================================================================ */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgb(2 86 97 / 0.13) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* ================================================================
+   Buttons micro-interactions
+   ================================================================ */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-shine::before {
+  content: "";
+  position: absolute;
+  inset: -2px auto -2px 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
+  transform: translateX(120%) skewX(-18deg);
+  z-index: -1;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .btn-shine:hover::before {
+    animation: shine 0.9s var(--ease-out-expo);
+  }
+}
+
+.pulse-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: pulse-ring 2.2s var(--ease-out-expo) infinite;
+}
+
+/* ================================================================
+   Hero orbit
+   ================================================================ */
+.orbit-traveler {
+  offset-rotate: 0deg;
+  animation: travel var(--dur, 14s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.float {
+  animation: float-y 6s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ================================================================
+   Steps: line drawing tied to scroll (progressive enhancement)
+   ================================================================ */
+.steps-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .steps-line {
+      stroke-dashoffset: 1;
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 55%;
+    }
+  }
+}
+
+/* ================================================================
+   FAQ accordion (details/summary + smooth height)
+   ================================================================ */
+.faq summary {
+  list-style: none;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq .faq-icon {
+  transition: transform 0.45s var(--ease-out-expo);
+}
+.faq[open] .faq-icon {
+  transform: rotate(45deg);
+}
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+  .faq::details-content {
+    height: 0;
+    overflow: clip;
+    transition:
+      height 0.5s var(--ease-out-expo),
+      content-visibility 0.5s allow-discrete;
+  }
+  .faq[open]::details-content {
+    height: auto;
+  }
+}
+
+/* ================================================================
+   Mobile sticky CTA safe-area
+   ================================================================ */
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+/* ================================================================
+   Reduced motion: إيقاف كل الحركات غير الضرورية
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+  }
+  .orbit-traveler,
+  .float,
+  .pulse-dot::before,
+  .animate-orbit-slow,
+  .animate-orbit-rev {
+    animation: none !important;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .travelers {
+    display: none;
+  }
+}
+
+/* دخول الواجهة الرئيسية بـ CSS فقط — لا ينتظر تحميل JavaScript */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-in {
+  animation: hero-rise 0.8s var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* عناصر LCP (العنوان والوصف): حركة إزاحة فقط دون إخفاء، لتظهر فورًا */
+@keyframes hero-rise-soft {
+  from {
+    transform: translateY(14px);
+  }
+  to {
+    transform: none;
+  }
+}
+.hero-in-soft {
+  animation: hero-rise-soft 0.9s var(--ease-out-expo) both;
+}
+
+/* الحبيبات: بدون mix-blend لتقليل كلفة الرسم */
+.grain::after {
+  mix-blend-mode: normal;
+  opacity: 0.035;
 }

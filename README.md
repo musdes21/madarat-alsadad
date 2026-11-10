@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# مدارات السداد — صفحة الهبوط
 
-## Getting Started
+صفحة هبوط عربية (RTL) لنشاط **مدارات السداد لتخليص الديون**، مبنية بـ Next.js 16 وTypeScript وTailwind CSS 4، وجاهزة للنشر على Vercel.
 
-First, run the development server:
+## التشغيل محليًا
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # بيئة التطوير على http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+نسخة الإنتاج:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## الفحوصات
 
-## Learn More
+```bash
+npm run lint         # ESLint
+npx tsc --noEmit     # فحص الأنواع
+npm run qa           # فحص آلي شامل (يتطلب تشغيل npm start أولًا)
+```
 
-To learn more about Next.js, take a look at the following resources:
+يفحص `npm run qa` (Playwright) روابط واتساب والاتصال، ترميز الرسائل العربية، صحة الاسم التجاري، اتجاه الأرقام، الـ SEO، الأسئلة الشائعة، قائمة الجوال، الشريط الثابت، وضع تقليل الحركة، والعرض بدون JavaScript.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## تعديل المحتوى
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+كل البيانات القابلة للتعديل في ملف واحد: **`src/config/site.ts`**
 
-## Deploy on Vercel
+- الاسم التجاري والوصف.
+- أرقام التواصل (`phones`): الصيغة المحلية للعرض والصيغة الدولية `966…` للروابط.
+- رسائل واتساب الجاهزة (`whatsappMessages`).
+- الخدمات الخمس، والأسئلة الشائعة، وخطوات التواصل.
+- رابط سياسة الخصوصية (`privacyPolicyUrl`) — يظهر في التذييل تلقائيًا عند تعبئته.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## هيكل المشروع
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/            layout (الخطوط + SEO + JSON-LD)، page، robots، sitemap، manifest، الأيقونات
+  config/site.ts  مصدر البيانات الوحيد
+  components/
+    Header.tsx, Footer.tsx, MobileCtaBar.tsx, RevealObserver.tsx
+    sections/     Hero, OrbitVisual, TrustStrip, Services, Why, Steps, Faq, FinalCta
+    ui/           CtaLink, SectionHeading
+    icons/        WhatsAppIcon, ServiceIcon
+public/
+  brand/          الشعار مستخرجًا من الملف الأصلي (فاتح/داكن، الرمز، الشعار الكامل)
+  og.png          صورة المشاركة 1200×630
+scripts/qa.mjs    الفحص الآلي
+```
+
+## النشر على Vercel
+
+1. ارفع المستودع إلى GitHub واستورده في Vercel (يتعرّف على Next.js تلقائيًا).
+2. أضف متغير البيئة `NEXT_PUBLIC_SITE_URL` بعنوان الموقع النهائي (مثل `https://example.sa`) — يُستخدم في الروابط الأساسية وOpen Graph وخريطة الموقع.
+3. انشر.
+
+## ملاحظات تحتاج قرارًا من صاحب النشاط
+
+- **اختلاف الاسم في الشعار:** الشعار الأصلي مكتوب فيه «مدارات السداد **لتحصيل** الديون»، بينما الاسم المعتمد «مدارات السداد **لتخليص** الديون». الصفحة تستخدم الاسم المعتمد في كل النصوص، وتعرض **رمز الشعار فقط** دون الكلمات حتى لا يظهر التعارض. يُفضّل تحديث ملف الشعار.
+- **«سما» أم «سمة»:** الاسم الرسمي للشركة السعودية للمعلومات الائتمانية هو «سمة». الصفحة تستخدم «سما» كما ورد في المطبوعة والطلب، ويمكن تعديلها من `site.ts`.
+- **ملف الشعار الأصلي:** الشعار مستخرج كمتجه من ملف PDF بجودة عالية وبدون إعادة رسم. يُستحسن الحصول على ملف SVG/AI الأصلي لاستخدامه مستقبلًا.
+- **سياسة الخصوصية:** لم تُنشأ صفحة قانونية لعدم توفر نص معتمد.
