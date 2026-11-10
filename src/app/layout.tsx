@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title,
     description: site.description,
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: site.legalName }],
+    images: [{ url: "/og.jpg", width: 800, height: 420, alt: site.legalName }],
   },
   twitter: {
     card: "summary_large_image",
