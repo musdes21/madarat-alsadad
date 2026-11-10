@@ -75,10 +75,11 @@ const b = await chromium.launch();
   ok("Exactly one <h1>", meta.h1 === 1);
   ok("Title, description, canonical, OG (ar_SA) present", !!(meta.title && meta.desc && meta.og && meta.canonical && meta.ogLocale === "ar_SA"));
   ok("JSON-LD FinancialService + FAQPage", meta.ld.includes("FinancialService") && meta.ld.includes("FAQPage"));
-  const ogRes = await p.request.get(new URL(new URL(meta.og).pathname, BASE).href);
-  ok("OG image served", ogRes.status() === 200);
+  // الطلبات تُرسل من داخل الصفحة لتمر عبر نفس شبكة المتصفح (تعمل محليًا وعلى الموقع المنشور)
+  const status = (path) => p.evaluate((u) => fetch(u, { cache: "no-store" }).then((r) => r.status), path);
+  ok("OG image served", (await status(new URL(meta.og).pathname)) === 200);
   for (const path of ["/robots.txt", "/sitemap.xml", "/manifest.webmanifest", "/icon.png", "/apple-icon.png"]) {
-    ok(`${path} served`, (await p.request.get(BASE + path)).status() === 200);
+    ok(`${path} served`, (await status(path)) === 200);
   }
 
   await p.evaluate(() => scrollTo({ top: document.body.scrollHeight, behavior: "instant" }));
