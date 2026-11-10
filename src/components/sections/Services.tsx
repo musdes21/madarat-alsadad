@@ -3,7 +3,6 @@ import { serviceWhatsappLink, site, telLink, type Service } from "@/config/site"
 import { ServiceIcon } from "../icons/ServiceIcon";
 import { WhatsAppIcon } from "../icons/WhatsAppIcon";
 import { SectionHeading } from "../ui/SectionHeading";
-import { SectionMarker } from "../ui/SectionMarker";
 
 /** توزيع الشبكة: بطاقتان عريضتان ثم ثلاث */
 const spans = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2"];
@@ -90,10 +89,8 @@ function ServiceCard({ service, index, featured }: { service: Service; index: nu
 
 export function Services() {
   return (
-    <section id="services" aria-labelledby="services-title" className="relative px-4 pt-8 pb-24 sm:px-6 sm:pt-12 sm:pb-32 lg:px-8">
+    <section id="services" aria-labelledby="services-title" className="relative px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionMarker icon="services" />
-        <div className="mt-8" />
         <SectionHeading
             id="services-title"
             eyebrow="خدماتنا"

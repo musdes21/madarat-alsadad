@@ -3,16 +3,12 @@ import { site, telLink, whatsappLink } from "@/config/site";
 import { WhatsAppIcon } from "../icons/WhatsAppIcon";
 import Image from "next/image";
 import { CtaLink } from "../ui/CtaLink";
-import { SectionMarker } from "../ui/SectionMarker";
 
 const ordinals = ["الرقم الأول", "الرقم الثاني", "الرقم الثالث"];
 
 export function FinalCta() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="px-4 pb-6 sm:px-6 lg:px-8">
-      <div className="mb-8">
-        <SectionMarker icon="contact" />
-      </div>
       <div className="grain relative isolate mx-auto max-w-7xl overflow-hidden rounded-[36px] bg-ink px-5 py-16 text-white sm:px-12 sm:py-24">
         <svg aria-hidden="true" viewBox="0 0 800 800" className="animate-orbit-rev pointer-events-none absolute top-1/2 left-1/2 -z-10 size-[64rem] -translate-x-1/2 -translate-y-1/2 opacity-60">
           <ellipse cx="400" cy="400" rx="390" ry="140" fill="none" stroke="#fff" strokeOpacity="0.06" transform="rotate(-16 400 400)" />

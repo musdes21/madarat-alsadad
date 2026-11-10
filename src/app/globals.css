@@ -327,7 +327,7 @@ body {
 }
 
 /* ================================================================
-   الرحلة المتصلة: محطات الأقسام + خط التقدّم
+   شريط الأقسام + خط تقدّم القراءة
    ================================================================ */
 .no-scrollbar {
   scrollbar-width: none;
@@ -336,24 +336,6 @@ body {
   display: none;
 }
 
-@keyframes grow-y {
-  from {
-    transform: scaleY(0);
-  }
-  to {
-    transform: scaleY(1);
-  }
-}
-@keyframes node-in {
-  from {
-    transform: scale(0.6);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
 @keyframes progress-x {
   from {
     transform: scaleX(0);
@@ -369,16 +351,6 @@ body {
 
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .marker-line {
-      animation: grow-y linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 35%;
-    }
-    .marker-node {
-      animation: node-in linear both;
-      animation-timeline: view();
-      animation-range: entry 20% cover 40%;
-    }
     .scroll-progress {
       animation: progress-x linear both;
       animation-timeline: scroll(root);

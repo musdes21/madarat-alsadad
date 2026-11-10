@@ -3,7 +3,6 @@ import { whatsappLink } from "@/config/site";
 import { WhatsAppIcon } from "../icons/WhatsAppIcon";
 import { CtaLink } from "../ui/CtaLink";
 import { SectionHeading } from "../ui/SectionHeading";
-import { SectionMarker } from "../ui/SectionMarker";
 
 const principles = [
   { icon: Ear, title: "نسمعك أولًا", body: "نبدأ بفهم حالتك والتزاماتك كما هي، دون أحكام مسبقة أو استعجال." },
@@ -14,10 +13,7 @@ const principles = [
 
 export function Why() {
   return (
-    <section id="why" aria-labelledby="why-title" className="relative overflow-hidden bg-white px-4 pt-0 pb-24 sm:px-6 sm:pb-32 lg:px-8">
-      <div className="relative mb-12 sm:mb-16">
-        <SectionMarker icon="why" />
-      </div>
+    <section id="why" aria-labelledby="why-title" className="relative overflow-hidden bg-white px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
       <div aria-hidden="true" className="dot-grid pointer-events-none absolute inset-y-0 left-0 w-1/2 [mask-image:linear-gradient(to_right,black,transparent)]" />
       <div className="relative mx-auto grid max-w-7xl gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
