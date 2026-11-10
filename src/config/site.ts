@@ -38,7 +38,10 @@ export const site = {
   description:
     "مدارات السداد لتخليص الديون: استفسر عن تسديد القروض البنكية، سداد المتعثرات لدى سما، سداد إيقاف الخدمات والمخالفات المرورية، سداد البطاقات الائتمانية، والتمويل لمن تعيقهم ظروف التمويل. تواصل مباشرة عبر واتساب أو الاتصال.",
   /** يُضبط عبر متغير البيئة NEXT_PUBLIC_SITE_URL عند النشر */
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, ""),
+  url: (
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000")
+  ).replace(/\/$/, ""),
   locale: "ar_SA",
   country: "SA",
   countryCallingCode: "966",
