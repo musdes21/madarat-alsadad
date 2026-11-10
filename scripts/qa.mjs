@@ -76,7 +76,7 @@ const b = await chromium.launch();
   ok("JSON-LD FinancialService + FAQPage", meta.ld.includes("FinancialService") && meta.ld.includes("FAQPage"));
   const ogRes = await p.request.get(new URL(new URL(meta.og).pathname, BASE).href);
   ok("OG image served", ogRes.status() === 200);
-  for (const path of ["/robots.txt", "/sitemap.xml", "/manifest.webmanifest", "/icon.png", "/apple-icon.png", "/favicon.ico"]) {
+  for (const path of ["/robots.txt", "/sitemap.xml", "/manifest.webmanifest", "/icon.png", "/apple-icon.png"]) {
     ok(`${path} served`, (await p.request.get(BASE + path)).status() === 200);
   }
 

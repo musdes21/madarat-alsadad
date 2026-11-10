@@ -79,7 +79,7 @@ export function OrbitVisual() {
         <circle cx="300" cy="300" r="122" fill="none" stroke="#fff" strokeOpacity="0.14" />
         <circle cx="300" cy="300" r="104" fill="none" stroke="#fff" strokeOpacity="0.06" />
         <path d="M206 252a110 110 0 0 1 150-46" fill="none" stroke="#fff" strokeOpacity="0.18" strokeWidth="2" strokeLinecap="round" />
-        <image href="/brand/mark-orbit.png" x="212" y="228" width="176" height="144" preserveAspectRatio="xMidYMid meet" />
+        <image href="/brand/mark-orbit.webp" x="212" y="228" width="176" height="144" preserveAspectRatio="xMidYMid meet" />
       </svg>
 
       <ul aria-label="خدماتنا" className="absolute inset-0">

@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-12 border-b border-teal/10 pb-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <a href="#top" className="inline-flex items-center gap-3" aria-label={`${site.name} — العودة للأعلى`}>
-              <Image src="/brand/mark.png" alt="" width={56} height={46} className="h-11 w-auto" />
+              <Image src="/brand/mark.webp" alt="" width={56} height={46} className="h-11 w-auto" />
               <span className="leading-tight">
                 <span className="block font-display text-xl font-bold text-teal">{site.name}</span>
                 <span className="block text-sm text-ink/65">{site.tagline}</span>

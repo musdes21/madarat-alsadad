@@ -59,7 +59,7 @@ export function Header() {
         <a href="#top" className="flex min-h-11 items-center gap-3" aria-label={`${site.name} — العودة للأعلى`}>
           <span className="relative block h-9 w-11 sm:h-10 sm:w-12">
             <Image
-              src="/brand/mark-light.png"
+              src="/brand/mark-light.webp"
               alt=""
               fill
               sizes="48px"
@@ -67,7 +67,7 @@ export function Header() {
               className={`object-contain transition-opacity duration-500 ${solid ? "opacity-0" : "opacity-100"}`}
             />
             <Image
-              src="/brand/mark.png"
+              src="/brand/mark.webp"
               alt=""
               fill
               sizes="48px"
